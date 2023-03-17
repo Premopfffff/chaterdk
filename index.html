@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>chatting web</title>
+   
+    <div id="opp">
+      <br>
+      <h1 id="oppp">Chater dk (v1)</h1>
+    </div>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <iframe src="https://Op.premruidas.repl.co/messages.txt" width="356px;" height="557px;"></iframe>
+
+    <form>
+     <div class="container1">
+       <input type="text" id="message" placeholder="Enter your message...">
+       <button type="submit" onclick="saveMessage(event)" id="bbu">Send</button>
+     </div>
+    </form>
+
+    <script>
+      function saveMessage(event) {
+        event.preventDefault(); // prevent form submission and page reload
+
+        var message = document.getElementById("message").value;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            console.log("Message saved!");
+            setTimeout(function() { location.reload(); }, 1000); // refresh page after 1 second
+          }
+        };
+        xhttp.open("POST", "https://Op.premruidas.repl.co/index.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("message=" + message);
+        setTimeout(function() { location.reload(); }, 500); // refresh page after 0.5 second
+      }
+    </script>
+  </body>
+</html>
